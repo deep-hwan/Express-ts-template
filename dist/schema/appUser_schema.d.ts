@@ -1,4 +1,4 @@
-export const PortfolioUser: mongoose.Model<{
+export const AppUser: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
@@ -48,4 +48,4 @@ export const PortfolioUser: mongoose.Model<{
 }> & {
     _id: mongoose.Types.ObjectId;
 }, never>>>;
-import mongoose from 'mongoose';
+import mongoose from "mongoose";

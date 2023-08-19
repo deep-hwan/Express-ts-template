@@ -35,59 +35,48 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectDB = exports.useVirtualId = void 0;
-var mongoose_1 = __importDefault(require("mongoose"));
-var config_1 = require("../utils/config");
-// export async function connectDB() {
-//   try {
-//     await mongoose.connect(config.db, {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//     })
-//     console.log('mongodb 연결완료')
-//   } catch (error) {
-//     console.log('mongoDB 연결에러', error)s
-//   }
-// }
-//_id => id
-function useVirtualId(userSchema) {
-    userSchema.virtual("id").get(function () {
-        return this._id.toString();
-    });
-    userSchema.set("toJSON", { virtuals: true });
-    userSchema.set("toObject", { virtuals: true });
-}
-exports.useVirtualId = useVirtualId;
+exports.signIn = void 0;
+var appUser_schema_js_1 = require("../../schema/appUser_schema.js");
 //
-////
-var connectDB = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var err_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, mongoose_1.default
-                        .set("debug", process.env.NODE_ENV === "development")
-                        .connect(config_1.config.db, {
-                        useNewUrlParser: true,
-                        useUnifiedTopology: true,
-                    })];
-            case 1:
-                _a.sent();
-                mongoose_1.default.Promise = global.Promise;
-                return [3 /*break*/, 3];
-            case 2:
-                err_1 = _a.sent();
-                console.error(err_1.message);
-                process.exit(1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
+/// 로그인
+//
+function signIn(req, res, next) {
+    return __awaiter(this, void 0, void 0, function () {
+        var _a, email, name, foundUser, token, createdUser, token;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _a = req.body, email = _a.email, name = _a.name;
+                    return [4 /*yield*/, appUser_schema_js_1.AppUser.findOne({
+                            email: email,
+                        })];
+                case 1:
+                    foundUser = _b.sent();
+                    if (!foundUser) return [3 /*break*/, 2];
+                    token = jwtToken(foundUser.id);
+                    res.status(200).json({
+                        email: email,
+                        name: name,
+                        token: token,
+                    });
+                    return [3 /*break*/, 4];
+                case 2: return [4 /*yield*/, new appUser_schema_js_1.AppUser({
+                        email: email,
+                        name: name,
+                    })
+                        .save()
+                        .then(function (data) { return data.id; })];
+                case 3:
+                    createdUser = _b.sent();
+                    token = jwtToken(createdUser);
+                    res.status(201).json({ email: email, name: name, token: token });
+                    _b.label = 4;
+                case 4: return [2 /*return*/];
+            }
+        });
     });
-}); };
-exports.connectDB = connectDB;
-//# sourceMappingURL=database.js.map
+}
+exports.signIn = signIn;
+console.log("npm run dev");
+//# sourceMappingURL=module.js.map

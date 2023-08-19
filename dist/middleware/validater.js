@@ -77,7 +77,7 @@ function isVerify(req, res, next) {
                                         .status(401)
                                         .json({ message: "Authentication Error _ jwt 에러" })];
                             }
-                            return [4 /*yield*/, appUser_schema_js_1.PortfolioUser.findById(decoded.id)];
+                            return [4 /*yield*/, appUser_schema_js_1.AppUser.findById(decoded.id)];
                         case 1:
                             user = _a.sent();
                             if (!user) {

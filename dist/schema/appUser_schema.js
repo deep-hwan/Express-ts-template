@@ -3,10 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PortfolioUser = void 0;
+exports.AppUser = void 0;
 var mongoose_1 = __importDefault(require("mongoose"));
 var Schema = mongoose_1.default.Schema;
-var meSchema = new Schema({
+var appSchema = new Schema({
     email: { type: String },
     name: { type: String }, // 로그인 이름
 }, {
@@ -15,5 +15,5 @@ var meSchema = new Schema({
     versionKey: false,
     timestamps: true,
 });
-exports.PortfolioUser = mongoose_1.default.model('portfolioUser', meSchema);
+exports.AppUser = mongoose_1.default.model("appUser", appSchema);
 //# sourceMappingURL=appUser_schema.js.map

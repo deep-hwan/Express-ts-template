@@ -1,6 +1,7 @@
-# Node.js Develop Template
+# Express.js + Typescript + Mongoose + GCP Template
 
 셋팅이 완료된 빠른 개발이 가능한 백엔드 템플릿
+Express.js + Typescript + Mongoose + GCP (Cloud Run) 템플릿
 
 ## start nodemon
 
