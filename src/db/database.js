@@ -26,15 +26,14 @@ export function useVirtualId(userSchema) {
 ////
 export const connectDB = async () => {
   try {
-    await mongoose
-      .set("debug", process.env.NODE_ENV === "development")
-      .connect(config.db, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+    await mongoose.connect(config.db, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     mongoose.Promise = global.Promise;
+    console.log("MongoDB 연결 완료");
   } catch (err) {
-    console.error(err.message);
+    console.error("MongoDB 연결 에러:", err.message);
     process.exit(1);
   }
 };
