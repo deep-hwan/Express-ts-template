@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { useVirtualId } from "../db/database.ts";
 const Schema = mongoose.Schema;
 
 const appSchema = new Schema(
@@ -13,5 +14,7 @@ const appSchema = new Schema(
     timestamps: true,
   }
 );
+
+useVirtualId(appSchema);
 
 export const AppUser = mongoose.model("appUser", appSchema);

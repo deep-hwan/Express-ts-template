@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { signIn } from "../module/module";
+import { signIn } from "../module/module.ts";
 
 const router = Router();
 

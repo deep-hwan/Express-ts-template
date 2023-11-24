@@ -1,18 +1,17 @@
 import express from "express";
 
-//module
+//hooks
 import cors from "cors";
 import morgan from "morgan";
-
 import fileUpload from "express-fileupload";
 import bodyParser from "body-parser";
 import "express-async-errors";
 
 //db
-import { connectDB } from "./db/database.js";
+import { connectDB } from "./libs/db/database.ts";
 
-//
-import main from "./v1/routes/main_router.js";
+//router
+import main from "./v1/routes/main_router.ts";
 
 const app = express();
 
@@ -29,7 +28,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use("/v1/main", main);
 
-app.use((error, res) => {
+app.use((error: unknown, res: any) => {
   console.error(error);
   res.sendStatus(500);
 });

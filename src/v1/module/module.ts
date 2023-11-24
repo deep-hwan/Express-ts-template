@@ -1,9 +1,10 @@
-import { AppUser } from "../../schema/appUser_schema.js";
+import { jwtToken } from "../../libs/middleware/jwt.ts";
+import { AppUser } from "../../libs/schema/appUser_schema.js";
 
 //
 /// 로그인
 //
-export async function signIn(req, res, next) {
+export async function signIn(req, res) {
   const { email, name } = req.body;
 
   const foundUser = await AppUser.findOne({
