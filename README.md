@@ -5,6 +5,10 @@ Express.js + Typescript + Mongoose + GCP (Cloud Run) 템플릿
 
 ## start nodemon
 
+    rm -rf node_modules
+    rm package-lock.json
+    npm install
+    npm run build
     npm run dev
 
 ---

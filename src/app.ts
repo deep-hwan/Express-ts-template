@@ -28,6 +28,10 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use("/v1/main", main);
 
+app.use((req, res) => {
+  res.status(404).send("404 : 터미널을 통해 확인하세요");
+});
+
 app.use((error: unknown, res: any) => {
   console.error(error);
   res.sendStatus(500);
